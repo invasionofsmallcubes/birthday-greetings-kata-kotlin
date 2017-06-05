@@ -12,3 +12,10 @@ Welcome to `kata` branch!
 I used this [link] to migrate from a `java` project to a mixed project `kotlin`/`java`.
 
 The main point is that `kotlin` code should compile before `java` code so that it can be used.
+
+Test is still failing so everything is being executed
+
+####Iteration \#2
+Started refactoring in `Java`. Almost addressed all the peculiar points.
+
+

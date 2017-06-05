@@ -9,22 +9,22 @@ public class Employee {
 	private String firstName;
 	private String email;
 
-	public Employee(String firstName, String lastName, String birthDate, String email) throws ParseException {
+	Employee(String firstName, String lastName, String birthDate, String email) throws ParseException {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthDate = new XDate(birthDate);
 		this.email = email;
 	}
 
-	public boolean isBirthday(XDate today) {
+	boolean isBirthday(XDate today) {
 		return today.isSameDay(birthDate);
 	}
 
-	public String getEmail() {
+	String getEmail() {
 		return email;
 	}
 
-	public String getFirstName() {
+	String getFirstName() {
 		return firstName;
 	}
 
