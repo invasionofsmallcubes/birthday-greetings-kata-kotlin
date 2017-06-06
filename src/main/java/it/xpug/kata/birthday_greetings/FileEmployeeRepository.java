@@ -17,15 +17,20 @@ public class FileEmployeeRepository {
     }
 
     @NotNull
-    List<Employee> recoverEmployees() throws IOException, ParseException {
+    List<Employee> recoverEmployees() {
         List<Employee> employeeList = new ArrayList<>();
-        BufferedReader in = new BufferedReader(new FileReader(fileName));
-        String str;
-        in.readLine();
-        while ((str = in.readLine()) != null) {
-            String[] employeeData = str.split(", ");
-            Employee employee = new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3]);
-            employeeList.add(employee);
+        BufferedReader in;
+        try {
+            in = new BufferedReader(new FileReader(fileName));
+            String str;
+            in.readLine();
+            while ((str = in.readLine()) != null) {
+                String[] employeeData = str.split(", ");
+                Employee employee = new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3]);
+                employeeList.add(employee);
+            }
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
         }
         return employeeList;
     }

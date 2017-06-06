@@ -18,4 +18,7 @@ Test is still failing so everything is being executed
 ####Iteration \#2
 Started refactoring in `Java`. Almost addressed all the peculiar points.
 
+####Iteration \#3
+Added spring-boot as dependency and changed the acceptance test to use `@SpringBootTest`
+
 

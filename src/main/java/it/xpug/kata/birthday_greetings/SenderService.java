@@ -1,25 +1,20 @@
 package it.xpug.kata.birthday_greetings;
 
 import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
 
-class SenderService {
+import static javax.mail.Transport.send;
 
-    private final Session session;
+public class SenderService {
+
     private final MessageBuilder messageBuilder;
 
-    SenderService(String smtpHost, int smtpPort, MessageBuilder messageBuilder) {
-        java.util.Properties props = new java.util.Properties();
-        props.put("mail.smtp.host", smtpHost);
-        props.put("mail.smtp.port", "" + smtpPort);
-        this.session = Session.getInstance(props, null);
+    public SenderService(MessageBuilder messageBuilder) {
         this.messageBuilder = messageBuilder;
     }
 
     void sendMessageTo(Employee e) {
         try {
-            Transport.send(messageBuilder.buildMessage(e, this));
+            send(messageBuilder.buildMessage(e));
         } catch (MessagingException ex) {
             ex.printStackTrace();
         }

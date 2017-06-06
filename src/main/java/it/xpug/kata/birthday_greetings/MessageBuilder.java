@@ -8,16 +8,16 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-class MessageBuilder {
+public class MessageBuilder {
 
     private final Session session;
 
-    MessageBuilder(Session session) {
+    public MessageBuilder(Session session) {
         this.session = session;
     }
 
     @NotNull
-    Message buildMessage(Employee e, SenderService senderService) throws MessagingException {
+    Message buildMessage(Employee e) throws MessagingException {
         Message msg;
         msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress("sender@here.com"));

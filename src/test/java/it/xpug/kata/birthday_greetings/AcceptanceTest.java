@@ -2,29 +2,32 @@ package it.xpug.kata.birthday_greetings;
 
 import static org.junit.Assert.*;
 
+import it.xpug.kata.birthday_greetings.conf.Config;
 import org.junit.*;
 
 import com.dumbster.smtp.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.mail.Session;
 
-
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Config.class)
+@ActiveProfiles("test")
 public class AcceptanceTest {
 
 	private static final int NONSTANDARD_PORT = 9999;
-	private BirthdayService birthdayService;
 	private SimpleSmtpServer mailServer;
+
+	@Autowired
+	private BirthdayService birthdayService;
 
 	@Before
 	public void setUp() throws Exception {
-
-		java.util.Properties props = new java.util.Properties();
-		props.put("mail.smtp.host", "localhost");
-		props.put("mail.smtp.port", "" + NONSTANDARD_PORT);
-		Session session = Session.getInstance(props, null);
-
 		mailServer = SimpleSmtpServer.start(NONSTANDARD_PORT);
-		birthdayService = new BirthdayService(new FileEmployeeRepository("employee_data.txt"), new SenderService("localhost", NONSTANDARD_PORT, new MessageBuilder(session)));
 	}
 
 	@After
