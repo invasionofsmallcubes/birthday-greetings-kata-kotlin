@@ -23,3 +23,6 @@ Added spring-boot as dependency and changed the acceptance test to use `@SpringB
 
 ####Iteration \#4
 Added spring plugin, continued conversion to kotlin. Removing checked exception declaration. (Kotlin does not have checked :) )
+
+####Iteration \#5
+Moved all production code to Kotlin
