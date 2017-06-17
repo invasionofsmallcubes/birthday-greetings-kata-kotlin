@@ -9,8 +9,8 @@ class XDateTest {
     @Test
     fun getters() {
         val date = XDate("1789/01/24")
-        assertEquals(1, date.month.toLong())
-        assertEquals(24, date.day.toLong())
+        assertEquals(1, date.month)
+        assertEquals(24, date.day)
     }
 
     @Test

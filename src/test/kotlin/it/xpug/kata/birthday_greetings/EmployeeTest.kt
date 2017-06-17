@@ -1,26 +1,23 @@
 package it.xpug.kata.birthday_greetings
 
-import org.junit.Assert.*
-
-import org.junit.*
+import io.kotlintest.matchers.shouldBe
 
 
-class EmployeeTest {
+import io.kotlintest.specs.StringSpec
 
-    @Test
-    fun testBirthday() {
+class EmployeeTest : StringSpec({
+    "employee has a birthday" {
         val employee = Employee("foo", "bar", XDate("1990/01/31"), "a@b.c")
-        assertFalse("not his birthday", employee.isBirthday(XDate("2008/01/30")))
-        assertTrue("his birthday", employee.isBirthday(XDate("2008/01/31")))
+        employee.isBirthday(XDate("2008/01/30")) shouldBe false
+        employee.isBirthday(XDate("2008/01/31")) shouldBe true
     }
-
-    @Test
-    fun equality() {
+    "employee equality" {
         val base = Employee("First", "Last", XDate("1999/09/01"), "first@last.com")
         val same = Employee("First", "Last", XDate("1999/09/01"), "first@last.com")
         val different = Employee("First", "Last", XDate("1999/09/01"), "boom@boom.com")
 
-        assertTrue(base == same)
-        assertFalse(base == different)
+        (base == same) shouldBe true
+        (base === same) shouldBe false
+        (base == different) shouldBe false
     }
-}
+})

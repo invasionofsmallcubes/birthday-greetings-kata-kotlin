@@ -6,6 +6,7 @@ import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
 class MessageBuilder(private val session: Session) {
+
     fun buildMessage(e: Employee): Message {
         val msg: Message
         msg = MimeMessage(session)
@@ -16,4 +17,5 @@ class MessageBuilder(private val session: Session) {
                 e.firstName))
         return msg
     }
+
 }

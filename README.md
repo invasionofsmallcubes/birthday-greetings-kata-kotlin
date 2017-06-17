@@ -64,3 +64,6 @@ SUM:                             8             21              0             79
 #### Iteration \#8
 Moved all the tests, discovered the keyword `lateinit`, really handy when you have to use `@Autowired`.
 Last thing is refactoring tests using `kotlintest` library.
+
+#### Iteration \#9
+Changed tests to use `kotlintest`. All but the acceptance test because the `SpringRunner` wants the junit runner

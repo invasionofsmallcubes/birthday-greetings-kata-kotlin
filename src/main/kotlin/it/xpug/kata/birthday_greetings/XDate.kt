@@ -1,25 +1,24 @@
 package it.xpug.kata.birthday_greetings
 
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.LocalDate
+import java.time.LocalDate.parse
+import java.time.format.DateTimeFormatter.ofPattern
 
-data class XDate(val date: Date) {
+data class XDate(val date: LocalDate) {
 
-    constructor(yyyyMMdd: String) : this(SimpleDateFormat("yyyy/MM/dd").parse(yyyyMMdd))
+    constructor(yyyyMMdd: String) : this(parse(yyyyMMdd, formatter))
 
     val day
-        get() = getPartOfDate(GregorianCalendar.DAY_OF_MONTH)
+        get() = date.dayOfMonth
 
     val month
-        get() = 1 + getPartOfDate(GregorianCalendar.MONTH)
+        get() = date.month.value
 
     fun isSameDay(anotherDate: XDate): Boolean {
         return anotherDate.day == this.day && anotherDate.month == this.month
     }
 
-    private fun getPartOfDate(part: Int): Int {
-        val calendar = GregorianCalendar()
-        calendar.time = date
-        return calendar.get(part)
+    companion object {
+        val formatter = ofPattern("yyyy/MM/dd")
     }
 }
