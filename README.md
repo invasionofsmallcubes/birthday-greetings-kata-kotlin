@@ -26,3 +26,17 @@ Added spring plugin, continued conversion to kotlin. Removing checked exception 
 
 ####Iteration \#5
 Moved all production code to Kotlin
+
+####Iteration \#6
+Really small iteration to write a method in a more idiomatic way:
+```
+    fun recoverEmployees(): List<Employee> {
+        return File(fileName).useLines { lines ->
+            lines.drop(1).map { line ->
+                val employeeData = line.split(", ")
+                Employee(employeeData[1], employeeData[0], XDate(employeeData[2]), employeeData[3])
+            }.toList()
+        }
+    }
+```
+
