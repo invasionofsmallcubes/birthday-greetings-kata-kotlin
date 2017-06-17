@@ -21,4 +21,5 @@ Started refactoring in `Java`. Almost addressed all the peculiar points.
 ####Iteration \#3
 Added spring-boot as dependency and changed the acceptance test to use `@SpringBootTest`
 
-
+####Iteration \#4
+Added spring plugin, continued conversion to kotlin. Removing checked exception declaration. (Kotlin does not have checked :) )
