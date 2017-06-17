@@ -40,3 +40,22 @@ Really small iteration to write a method in a more idiomatic way:
     }
 ```
 
+####Iteration \#7
+Changed `XDate` using data class but with utility methods. Also measured statistics with cloc
+
+```
+➜  src git:(kata) cloc main --exclude-dir=conf
+       8 text files.
+       8 unique files.
+       1 file ignored.
+
+github.com/AlDanial/cloc v 1.72  T=0.07 s (114.0 files/s, 1425.3 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+Kotlin                           7             21              0             77
+YAML                             1              0              0              2
+-------------------------------------------------------------------------------
+SUM:                             8             21              0             79
+-------------------------------------------------------------------------------
+```
