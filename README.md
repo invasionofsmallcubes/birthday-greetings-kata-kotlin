@@ -8,26 +8,26 @@ Usually this is a common use case in companies where you start with microservice
 
 Welcome to `kata` branch!
 
-####Iteration \#1
-I used this [link] to migrate from a `java` project to a mixed project `kotlin`/`java`.
+#### Iteration \#1
+I used this [link](https://kotlinlang.org/docs/reference/using-maven.html) to migrate from a `java` project to a mixed project `kotlin`/`java`.
 
 The main point is that `kotlin` code should compile before `java` code so that it can be used.
 
 Test is still failing so everything is being executed
 
-####Iteration \#2
+#### Iteration \#2
 Started refactoring in `Java`. Almost addressed all the peculiar points.
 
-####Iteration \#3
+#### Iteration \#3
 Added spring-boot as dependency and changed the acceptance test to use `@SpringBootTest`
 
-####Iteration \#4
+#### Iteration \#4
 Added spring plugin, continued conversion to kotlin. Removing checked exception declaration. (Kotlin does not have checked :) )
 
-####Iteration \#5
+#### Iteration \#5
 Moved all production code to Kotlin
 
-####Iteration \#6
+#### Iteration \#6
 Really small iteration to write a method in a more idiomatic way:
 ```
     fun recoverEmployees(): List<Employee> {
@@ -40,7 +40,7 @@ Really small iteration to write a method in a more idiomatic way:
     }
 ```
 
-####Iteration \#7
+#### Iteration \#7
 Changed `XDate` using data class but with utility methods. Also measured statistics with cloc
 
 ```
