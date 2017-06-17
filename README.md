@@ -7,6 +7,7 @@ The kata itself is not really complex so what I'm going to try is to refactor it
 Usually this is a common use case in companies where you start with microservices in Java.
 
 Welcome to `kata` branch!
+You can check the original problem on `start` branch!
 
 #### Iteration \#1
 I used this [link](https://kotlinlang.org/docs/reference/using-maven.html) to migrate from a `java` project to a mixed project `kotlin`/`java`.
@@ -59,3 +60,7 @@ YAML                             1              0              0              2
 SUM:                             8             21              0             79
 -------------------------------------------------------------------------------
 ```
+
+#### Iteration \#8
+Moved all the tests, discovered the keyword `lateinit`, really handy when you have to use `@Autowired`.
+Last thing is refactoring tests using `kotlintest` library.
