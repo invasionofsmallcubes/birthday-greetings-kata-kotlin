@@ -1,11 +1,13 @@
 package it.xpug.kata.birthday_greetings.messaging;
 
 import com.dumbster.smtp.SimpleSmtpServer;
+import com.dumbster.smtp.SmtpMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static java.lang.Thread.sleep;
+import static org.junit.Assert.assertEquals;
 
 public class SMTPMessagingServiceTest {
 
@@ -30,6 +32,13 @@ public class SMTPMessagingServiceTest {
     @Test
     public void succesfullySend() {
         messagingService.sendMessage("me", "ciao", "body", "you");
+        assertEquals("message not sent?", 1, mailServer.getReceivedEmailSize());
+        SmtpMessage message = (SmtpMessage) mailServer.getReceivedEmail().next();
+        assertEquals("body", message.getBody());
+        assertEquals("ciao", message.getHeaderValue("Subject"));
+        String[] recipients = message.getHeaderValues("To");
+        assertEquals(1, recipients.length);
+        assertEquals("you", recipients[0]);
     }
 
     @Test(expected = CantSendMessage.class)

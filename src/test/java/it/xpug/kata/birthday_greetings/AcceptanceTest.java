@@ -1,50 +1,35 @@
 package it.xpug.kata.birthday_greetings;
 
-import static org.junit.Assert.*;
+import it.xpug.kata.birthday_greetings.messaging.MessagingService;
+import org.junit.Before;
+import org.junit.Test;
 
-import it.xpug.kata.birthday_greetings.messaging.SMTPMessagingService;
-import org.junit.*;
-
-import com.dumbster.smtp.*;
+import static org.mockito.Mockito.*;
 
 
 public class AcceptanceTest {
 
-	private static final int NONSTANDARD_PORT = 9999;
-	public static final String SMTP_HOST = "localhost";
-	private BirthdayService birthdayService;
-	private SimpleSmtpServer mailServer;
+    private BirthdayService birthdayService;
+    private MessagingService messagingService = mock(MessagingService.class);
 
-	@Before
-	public void setUp() {
-		mailServer = SimpleSmtpServer.start(NONSTANDARD_PORT);
-		birthdayService = new BirthdayService(new SMTPMessagingService(SMTP_HOST, NONSTANDARD_PORT));
-	}
+    @Before
+    public void setUp() {
+        birthdayService = new BirthdayService(messagingService);
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		mailServer.stop();
-		Thread.sleep(200);
-	}
+    @Test
+    public void willSendGreetings_whenItsSomebodysBirthday() throws Exception {
 
-	@Test
-	public void willSendGreetings_whenItsSomebodysBirthday() throws Exception {
+        birthdayService.sendGreetings("employee_data.txt", new XDate("2008/10/08"));
 
-		birthdayService.sendGreetings("employee_data.txt", new XDate("2008/10/08"));
+        verify(messagingService).sendMessage("sender@here.com", "Happy Birthday!",
+                "Happy Birthday, dear John!", "john.doe@foobar.com");
 
-		assertEquals("message not sent?", 1, mailServer.getReceivedEmailSize());
-		SmtpMessage message = (SmtpMessage) mailServer.getReceivedEmail().next();
-		assertEquals("Happy Birthday, dear John!", message.getBody());
-		assertEquals("Happy Birthday!", message.getHeaderValue("Subject"));
-		String[] recipients = message.getHeaderValues("To");
-		assertEquals(1, recipients.length);
-		assertEquals("john.doe@foobar.com", recipients[0].toString());
-	}
+    }
 
-	@Test
-	public void willNotSendEmailsWhenNobodysBirthday() throws Exception {
-		birthdayService.sendGreetings("employee_data.txt", new XDate("2008/01/01"));
-
-		assertEquals("what? messages?", 0, mailServer.getReceivedEmailSize());
-	}
+    @Test
+    public void willNotSendEmailsWhenNobodysBirthday() throws Exception {
+        birthdayService.sendGreetings("employee_data.txt", new XDate("2008/01/01"));
+        verifyNoMoreInteractions(messagingService);
+    }
 }
