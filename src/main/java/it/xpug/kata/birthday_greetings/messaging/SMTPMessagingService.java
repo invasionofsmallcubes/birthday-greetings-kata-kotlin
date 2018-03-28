@@ -4,7 +4,6 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
@@ -19,13 +18,17 @@ public class SMTPMessagingService implements MessagingService {
         props.put("mail.smtp.port", "" + smtpPort);
     }
 
-    public void sendMessage(String sender, String subject, String body, String recipient) throws MessagingException {
-        Session session = Session.getInstance(props, null);
-        Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(sender));
-        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-        msg.setSubject(subject);
-        msg.setText(body);
-        Transport.send(msg);
+    public void sendMessage(String sender, String subject, String body, String recipient) {
+        try {
+            Session session = Session.getInstance(props, null);
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(sender));
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            msg.setSubject(subject);
+            msg.setText(body);
+            Transport.send(msg);
+        } catch (MessagingException e) {
+            throw new CantSendMessage();
+        }
     }
 }

@@ -17,7 +17,7 @@ public class BirthdayService {
 		this.messagingService = messagingService;
 	}
 
-	public void sendGreetings(String fileName, XDate xDate) throws IOException, ParseException, MessagingException {
+	public void sendGreetings(String fileName, XDate xDate) throws IOException, ParseException {
 		BufferedReader in = new BufferedReader(new FileReader(fileName));
 		String str = "";
 		str = in.readLine(); // skip header

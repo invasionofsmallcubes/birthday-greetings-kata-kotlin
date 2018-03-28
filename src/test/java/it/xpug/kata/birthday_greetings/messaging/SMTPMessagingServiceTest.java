@@ -5,8 +5,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.mail.MessagingException;
-
 import static java.lang.Thread.sleep;
 
 public class SMTPMessagingServiceTest {
@@ -30,12 +28,12 @@ public class SMTPMessagingServiceTest {
     }
 
     @Test
-    public void succesfullySend() throws MessagingException {
+    public void succesfullySend() {
         messagingService.sendMessage("me", "ciao", "body", "you");
     }
 
-    @Test(expected = MessagingException.class)
-    public void breakIt() throws MessagingException, InterruptedException {
+    @Test(expected = CantSendMessage.class)
+    public void breakIt() throws InterruptedException {
         mailServer.stop();
         sleep(200);
         messagingService.sendMessage("me", "ciao", "body", "you");
