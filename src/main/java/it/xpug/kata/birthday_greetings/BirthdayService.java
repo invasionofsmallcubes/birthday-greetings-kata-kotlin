@@ -1,5 +1,7 @@
 package it.xpug.kata.birthday_greetings;
 
+import it.xpug.kata.birthday_greetings.messaging.MessagingService;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

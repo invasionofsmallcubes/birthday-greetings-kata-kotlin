@@ -1,4 +1,4 @@
-package it.xpug.kata.birthday_greetings;
+package it.xpug.kata.birthday_greetings.messaging;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -8,7 +8,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-class MessagingService {
+public class SmtpMessagingService implements MessagingService {
     public void sendMessage(String smtpHost, int smtpPort, String sender, String subject, String body, String recipient) throws AddressException, MessagingException {
         // Create a mail session
         java.util.Properties props = new java.util.Properties();

@@ -2,6 +2,7 @@ package it.xpug.kata.birthday_greetings;
 
 import static org.junit.Assert.*;
 
+import it.xpug.kata.birthday_greetings.messaging.SmtpMessagingService;
 import org.junit.*;
 
 import com.dumbster.smtp.*;
@@ -14,9 +15,9 @@ public class AcceptanceTest {
 	private SimpleSmtpServer mailServer;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		mailServer = SimpleSmtpServer.start(NONSTANDARD_PORT);
-		birthdayService = new BirthdayService(new MessagingService());
+		birthdayService = new BirthdayService(new SmtpMessagingService());
 	}
 
 	@After
