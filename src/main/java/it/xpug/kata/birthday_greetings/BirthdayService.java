@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 
 public class BirthdayService {
 
@@ -18,7 +17,7 @@ public class BirthdayService {
 		this.messagingService = messagingService;
 	}
 
-	public void sendGreetings(String fileName, XDate xDate, String smtpHost, int smtpPort) throws IOException, ParseException, MessagingException {
+	public void sendGreetings(String fileName, XDate xDate) throws IOException, ParseException, MessagingException {
 		BufferedReader in = new BufferedReader(new FileReader(fileName));
 		String str = "";
 		str = in.readLine(); // skip header
@@ -29,7 +28,7 @@ public class BirthdayService {
 				String recipient = employee.getEmail();
 				String body = "Happy Birthday, dear %NAME%!".replace("%NAME%", employee.getFirstName());
 				String subject = "Happy Birthday!";
-				messagingService.sendMessage(smtpHost, smtpPort, "sender@here.com", subject, body, recipient);
+				messagingService.sendMessage("sender@here.com", subject, body, recipient);
 			}
 		}
 	}
