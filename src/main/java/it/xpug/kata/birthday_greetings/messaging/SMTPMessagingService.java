@@ -1,5 +1,7 @@
 package it.xpug.kata.birthday_greetings.messaging;
 
+import it.xpug.kata.birthday_greetings.template.HappyBirthdayTemplate;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -18,7 +20,7 @@ public class SMTPMessagingService implements MessagingService {
         props.put("mail.smtp.port", "" + smtpPort);
     }
 
-    public void sendMessage(String sender, String subject, String body, String recipient) {
+    private void sendMessage(String sender, String subject, String body, String recipient) {
         try {
             Session session = Session.getInstance(props, null);
             Message msg = new MimeMessage(session);
@@ -30,5 +32,10 @@ public class SMTPMessagingService implements MessagingService {
         } catch (MessagingException e) {
             throw new CantSendMessage();
         }
+    }
+
+    @Override
+    public void sendMessage(String me, HappyBirthdayTemplate happyBirthdayTemplate) {
+        this.sendMessage(me, happyBirthdayTemplate.subject(), happyBirthdayTemplate.body(), happyBirthdayTemplate.recipient());
     }
 }

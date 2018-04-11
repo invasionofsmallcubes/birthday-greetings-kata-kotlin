@@ -1,5 +1,7 @@
 package it.xpug.kata.birthday_greetings.messaging;
 
+import it.xpug.kata.birthday_greetings.template.HappyBirthdayTemplate;
+
 public interface MessagingService {
-    void sendMessage(String sender, String subject, String body, String recipient);
+    void sendMessage(String me, HappyBirthdayTemplate happyBirthdayTemplate);
 }

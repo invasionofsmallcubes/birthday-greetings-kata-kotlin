@@ -35,6 +35,13 @@ public class XDate {
 	}
 
 	@Override
+	public String toString() {
+		return "XDate{" +
+				"date=" + date +
+				'}';
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof XDate))
 			return false;
