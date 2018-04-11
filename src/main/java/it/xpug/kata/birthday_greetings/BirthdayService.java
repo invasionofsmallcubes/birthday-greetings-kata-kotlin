@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 public class BirthdayService {
 
     private final MessagingService messagingService;
-    private EmployeeDao employeeDao;
+    private final EmployeeDao employeeDao;
 
     BirthdayService(MessagingService messagingService, EmployeeDao employeeDao) {
         this.messagingService = messagingService;
@@ -25,8 +25,12 @@ public class BirthdayService {
                         new HappyBirthdayTemplate(e)));
     }
 
-    List<Employee> loadBy(Predicate<Employee> func) {
-        return employeeDao.load().stream().filter(func).collect(toList());
+    List<Employee> loadBy(Predicate<Employee> filterFunction) {
+        return employeeDao
+                .load()
+                .stream()
+                .filter(filterFunction)
+                .collect(toList());
     }
 
 }
