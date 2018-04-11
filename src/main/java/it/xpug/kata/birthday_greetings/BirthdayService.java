@@ -1,27 +1,32 @@
 package it.xpug.kata.birthday_greetings;
 
-import it.xpug.kata.birthday_greetings.employee.EmployeeRepository;
-import it.xpug.kata.birthday_greetings.employee.EmployeeRepositoryUsingAFile;
+import it.xpug.kata.birthday_greetings.employee.EmployeeDao;
 import it.xpug.kata.birthday_greetings.messaging.MessagingService;
 import it.xpug.kata.birthday_greetings.template.HappyBirthdayTemplate;
+
+import java.util.List;
+import java.util.function.Predicate;
+
+import static java.util.stream.Collectors.toList;
 
 public class BirthdayService {
 
     private final MessagingService messagingService;
-    private EmployeeRepository employeeRepository;
+    private EmployeeDao employeeDao;
 
-    BirthdayService(MessagingService messagingService, EmployeeRepository employeeRepository) {
+    BirthdayService(MessagingService messagingService, EmployeeDao employeeDao) {
         this.messagingService = messagingService;
-        this.employeeRepository = employeeRepository;
+        this.employeeDao = employeeDao;
     }
 
-    public void sendGreetings(XDate xDate) {
-        employeeRepository
-                .load()
-                .stream()
-                .filter(e -> e.isBirthday(xDate))
+    void sendGreetings(XDate xDate) {
+        loadBy(e -> e.isBirthday(xDate))
                 .forEach(e -> messagingService.sendMessage("sender@here.com",
                         new HappyBirthdayTemplate(e)));
+    }
+
+    List<Employee> loadBy(Predicate<Employee> func) {
+        return employeeDao.load().stream().filter(func).collect(toList());
     }
 
 }

@@ -9,10 +9,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeRepositoryUsingAFile implements EmployeeRepository {
+public class EmployeeDaoUsingAFile implements EmployeeDao {
     private String fileName;
 
-    public EmployeeRepositoryUsingAFile(String fileName) {
+    public EmployeeDaoUsingAFile(String fileName) {
         this.fileName = fileName;
     }
 
